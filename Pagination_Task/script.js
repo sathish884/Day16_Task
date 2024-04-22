@@ -132,7 +132,6 @@ let items = [];
 
 // function to display the items on the current page in the table.
 function displayItems() {
-
     // Calculate the start and end index of items for the current page
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -151,11 +150,8 @@ function displayItems() {
 
         // Populate table cells with item properties ('id', 'name', 'email')
         ['id', 'name', 'email'].forEach(prop => {
-
-            // Create a new table cell element with item property value
-            const cell = createElements('td', [''], item[prop]);
-
-            // Append the cell to the row
+            const cell = createElements('td');
+            cell.textContent = item[prop]
             row.appendChild(cell);
         });
 
@@ -163,7 +159,7 @@ function displayItems() {
         tableBody.appendChild(row);
     });
 
-    // Replace previous table body with new table body
+    // Replace previous table body with new table body or append it
     if (table.lastChild !== tableHead) {
         table.replaceChild(tableBody, table.lastChild);
     } else {
@@ -187,6 +183,7 @@ function updatePagination() {
 
     // Clear number buttons container
     numbersContainer.innerHTML = '';
+
     // Create number buttons for each page and update their active state
     for (let i = 1; i <= totalPages; i++) {
 
